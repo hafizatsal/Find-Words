@@ -1,1 +1,33 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm> // untuk transformasi huruf
 
+using namespace std;
+
+// Fungsi untuk mengonversi kata menjadi huruf kecil
+string toLower(string str) {
+    transform(str.begin(), str.end(), str.begin(), ::tolower);
+    return str;
+}
+
+// Fungsi untuk mencari kata secara horizontal
+bool searchHorizontal(vector<string>& matrix, string& word) {
+    word = toLower(word); // Mengonversi kata menjadi huruf kecil
+    int rows = matrix.size();
+    int cols = matrix[0].size();
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j <= cols - word.length(); ++j) {
+            bool found = true;
+            for (int k = 0; k < word.length(); ++k) {
+                if (tolower(matrix[i][j + k]) != word[k]) { // Mengonversi karakter dalam matrix menjadi huruf kecil
+                    found = false;
+                    break;
+                }
+            }
+            if (found) return true;
+        }
+    }
+    return false;
+}
