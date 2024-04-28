@@ -50,6 +50,26 @@ bool searchVertical(vector<string>& matrix, string& word) {
     return false;
 }
 
+bool searchDiagonal1(vector<string>& matrix, string& word) {
+    word = toLower(word); // Mengonversi kata menjadi huruf kecil
+    int rows = matrix.size();
+    int cols = matrix[0].size();
+
+    for (int i = 0; i <= rows - word.length(); ++i) {
+        for (int j = 0; j <= cols - word.length(); ++j) {
+            bool found = true;
+            for (int k = 0; k < word.length(); ++k) {
+                if (tolower(matrix[i + k][j + k]) != word[k]) { // Mengonversi karakter dalam matrix menjadi huruf kecil
+                    found = false;
+                    break;
+                }
+            }
+            if (found) return true;
+        }
+    }
+    return false;
+}
+
 
 
 int main() {
