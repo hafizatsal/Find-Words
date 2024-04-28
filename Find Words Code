@@ -51,7 +51,7 @@ bool searchVertical(vector<string>& matrix, string& word) {
 }
 
 bool searchDiagonal1(vector<string>& matrix, string& word) {
-    word = toLower(word); // Mengonversi kata menjadi huruf kecil
+    word = toLower(word); 
     int rows = matrix.size();
     int cols = matrix[0].size();
 
@@ -59,7 +59,7 @@ bool searchDiagonal1(vector<string>& matrix, string& word) {
         for (int j = 0; j <= cols - word.length(); ++j) {
             bool found = true;
             for (int k = 0; k < word.length(); ++k) {
-                if (tolower(matrix[i + k][j + k]) != word[k]) { // Mengonversi karakter dalam matrix menjadi huruf kecil
+                if (tolower(matrix[i + k][j + k]) != word[k]) { 
                     found = false;
                     break;
                 }
@@ -71,7 +71,7 @@ bool searchDiagonal1(vector<string>& matrix, string& word) {
 }
 
 bool searchDiagonal2(vector<string>& matrix, string& word) {
-    word = toLower(word); // Mengonversi kata menjadi huruf kecil
+    word = toLower(word); 
     int rows = matrix.size();
     int cols = matrix[0].size();
 
@@ -79,7 +79,7 @@ bool searchDiagonal2(vector<string>& matrix, string& word) {
         for (int j = 0; j <= cols - word.length(); ++j) {
             bool found = true;
             for (int k = 0; k < word.length(); ++k) {
-                if (tolower(matrix[i - k][j + k]) != word[k]) { // Mengonversi karakter dalam matrix menjadi huruf kecil
+                if (tolower(matrix[i - k][j + k]) != word[k]) { 
                     found = false;
                     break;
                 }
