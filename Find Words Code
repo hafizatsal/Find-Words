@@ -1,19 +1,17 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <algorithm> // untuk transformasi huruf
+#include <algorithm> 
 
 using namespace std;
 
-// Fungsi untuk mengonversi kata menjadi huruf kecil
 string toLower(string str) {
     transform(str.begin(), str.end(), str.begin(), ::tolower);
     return str;
 }
 
-// Fungsi untuk mencari kata secara horizontal
 bool searchHorizontal(vector<string>& matrix, string& word) {
-    word = toLower(word); // Mengonversi kata menjadi huruf kecil
+    word = toLower(word); 
     int rows = matrix.size();
     int cols = matrix[0].size();
 
@@ -21,7 +19,7 @@ bool searchHorizontal(vector<string>& matrix, string& word) {
         for (int j = 0; j <= cols - word.length(); ++j) {
             bool found = true;
             for (int k = 0; k < word.length(); ++k) {
-                if (tolower(matrix[i][j + k]) != word[k]) { // Mengonversi karakter dalam matrix menjadi huruf kecil
+                if (tolower(matrix[i][j + k]) != word[k]) { 
                     found = false;
                     break;
                 }
@@ -30,4 +28,72 @@ bool searchHorizontal(vector<string>& matrix, string& word) {
         }
     }
     return false;
+}
+
+bool searchVertical(vector<string>& matrix, string& word) {
+    word = toLower(word); 
+    int rows = matrix.size();
+    int cols = matrix[0].size();
+
+    for (int i = 0; i <= rows - word.length(); ++i) {
+        for (int j = 0; j < cols; ++j) {
+            bool found = true;
+            for (int k = 0; k < word.length(); ++k) {
+                if (tolower(matrix[i + k][j]) != word[k]) { 
+                    found = false;
+                    break;
+                }
+            }
+            if (found) return true;
+        }
+    }
+    return false;
+}
+
+
+int main() {
+    int n;
+    cin >> n;
+
+    vector<string> words(n);
+    for (int i = 0; i < n; ++i) {
+        cin >> words[i];
+    }
+
+    vector<string> matrix = {
+        "AAFLKHPFSSUFICICLESGNNH",
+        "SFVREOMRWLRTTSXOOONAOAO",
+        "QEIAIFXAEIRFVFYSXIMINJI",
+        "WSTRLGOCAPBIAFIWIWTUACM",
+        "FEYAEAISTPCRLUJKOAKCERS", 
+        "RVDAKPNDEEHDEMSNCKKFOAH", 
+        "MRNEDSLCRRIWNRSAAFITMMI", 
+        "YAAECIEAHYMOTAVHRSSTISB", 
+        "RJSEWELCCENNIETOHWSGLSE", 
+        "ATANYYMOIEESNESIOIRELTR", 
+        "UTENEWEBHMYBETNNRAIEBEN", 
+        "RCLKUTEAEQJLSGSHTGDSKOA", 
+        "BHOICATNRRSDDECEHOOLGIT", 
+        "ENSLUARIRSETALOCOHCTOHE",
+        "FZFUDQJYMADOYIWYGLOVESU", 
+        "TEKALFWONSNAEBMIEJTINTG", 
+        "ESWPOSJXEUTUYOZUWAKEZHM", 
+        "KZUHBPEZEERFLMSNOWBALLH", 
+        "NSNOWBOARDYTVWYCLEVOHSA", 
+        "ACOCROLGZIYCHODRAZZILBI", 
+        "LBVKKWANZAAOQINWOLPWONS", 
+        "BFREEZINGRAINSLILGTMELT", 
+        "HQPYLWHFMNFFUFPSWXNUMMY"
+    };
+
+    for (int i = 0; i < n; ++i) {
+        if (searchHorizontal(matrix, words[i]) || searchVertical(matrix, words[i]) ||
+            searchDiagonal1(matrix, words[i]) || searchDiagonal2(matrix, words[i])) {
+            cout << "Ada" << endl;
+        } else {
+            cout << "Tidak Ada" << endl;
+        }
+    }
+
+    return 0;
 }
